@@ -65,23 +65,6 @@
     - "keystore.jks"
     - "truststore.jks"
 
-- name: Create a Keytab dir
-  file:
-    path: /etc/security/keytab
-    state: "directory"
-
-- name: Copy keytab files
-  copy:
-    src: "{{ item }}"
-    dest: "/etc/security/keytab/{{ item }}"
-    group: hadoop
-    mode: "0644"
-  loop:
-    - "nn.service.keytab"
-    - "sn.service.keytab"
-    - "dn.service.keytab"
-    - "spnego.service.keytab"
-
 - name: Copy setting files to hadoop dir
   template:
     src: "{{ item }}.j2"
